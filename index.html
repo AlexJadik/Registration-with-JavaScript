@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Страница для Регистрации/Входа</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="main_wrapper">
+<div class="main_container">
+  <div class="register_container">
+    <h1 class="main_Text">👋 Зарегистрироваться и Войти</h1>
+    <p class="text_Register">Registration</p>
+
+  <div class="registerAccount">
+  <label for="userNameRegister">Введите Логин:</label>
+  <input type="text" id="userNameRegister" name="username">
+  </div>
+
+
+  <div class="registerPassword">
+    <label for="userName">Введите пароль (минимум 8 символом):</label>
+  <input type="password" id="passwordRegister" name="username" minlength="8" required>
+  </div>
+
+
+  <button class="btn btn__transition" id="btnRegister">Зарегистрироваться</button>
+  </div>
+  <div class="passwordIsNotCharacters">
+    <p class="passwordErrorCharacters" id="passErrorCharacters">Пароль должен быть минимум 8 символов</p>
+  </div>
+  <div class="ErrorInfoRegister">
+    <p class="InfoErrorRegister" id="TextInfoErrorRegister">Пожалуйста, заполните все поля</p>
+  </div>
+
+
+
+
+<div class="loginContainer">
+  <div style="position: relative;">
+  <p id="successMessage" style="display:none;">Успешная регистрация!</p>
+  </div>
+  <p class="textLogin">Log In</p>
+
+  <div class="loginAccount">
+    <label for="userNameLoginIn">Введите Логин:</label><br>
+  <input type="text" id="userNameLogin" name="username">
+  </div>
+
+
+  <div class="loginPassword">
+    <label for="userName">Введите пароль (минимум 8 символом):</label><br>
+    <input type="password" id="loginPassword" name="username" minlength="8" required>
+  </div>
+
+  <button class="btn" id="btnLogin">Войти</button>
+  </div>
+    <div class="ErrorInfoLogin">
+    <p class="InfoErrorLogin" id="TextInfoErrorLogin">Заполните все поля</p>
+  </div>
+
+
+  <div>
+    <p class="registerSucceseful" id="registerDone">Регистрация прошла успешно!</p>
+    <p class="registerName" id="registerUser">Вы вошли как: Alex</p>
+    <p class="registerFail" id="registerIsIncorrect">Неверный пароль!</p>
+  </div>
+
+
+  <div class="logoutBlock">
+    <button class="btnLogout" id="logoutBtn">Выйти</button>
+  </div>
+
+  </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
