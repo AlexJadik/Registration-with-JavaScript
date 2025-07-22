@@ -66,7 +66,7 @@ btnLogin.addEventListener('click', function () {
 
   if (savedUser && inputLogin === savedUser.login && inputPassword === savedUser.password) {
     localStorage.setItem('currentUser', savedUser.login);
-    window.location.href = '/html/account.html'; // Переход на личный кабинет
+    window.location.href = 'account.html'; // Переход на личный кабинет
   } else {
     messageError.style.display = 'block';
   }
