@@ -1,126 +1,84 @@
-const btnRegister = document.getElementById('btnRegister')
-const chooseBlock = document.querySelector('.chooseBlock')
+const btnRegister = document.getElementById('btnRegister');
+const chooseBlock = document.querySelector('.chooseBlock');
+const registerContainer = document.querySelector('.register_container');
+const loginContainer = document.querySelector('.loginContainer');
+const chooseRegisterBtn = document.getElementById('chooseRegisterBtn');
+const chooseLoginBtn = document.getElementById('chooseLoginBtn');
 
-btnRegister.addEventListener('click', function() {
+// Кнопка "Регистрация"
+btnRegister.addEventListener('click', function () {
+  const inputElementLogin = document.getElementById('userNameRegister');
+  const inputElementPassword = document.getElementById('passwordRegister');
+  const TextInfoErrorRegister = document.getElementById('TextInfoErrorRegister');
+  const passErrorCharacters = document.getElementById('passErrorCharacters');
+  const successMessage = document.getElementById('successMessage');
 
-    const inputElementLogin = document.getElementById('userNameRegister')
+  if (inputElementLogin.value === '' || inputElementPassword.value === '') {
+    TextInfoErrorRegister.style.display = 'block';
+    return;
+  } else {
+    TextInfoErrorRegister.style.display = 'none';
+  }
 
-    const inputElementPassword = document.getElementById('passwordRegister')
+  if (inputElementPassword.value.length < 8) {
+    passErrorCharacters.style.display = 'block';
+    return;
+  } else {
+    passErrorCharacters.style.display = 'none';
+  }
 
-    const TextInfoErrorRegister = document.getElementById('TextInfoErrorRegister')
+  const obj = {
+    login: inputElementLogin.value,
+    password: inputElementPassword.value
+  };
 
-    if (inputElementLogin.value === '' ||inputElementPassword.value === '') {
-        TextInfoErrorRegister.style.display = 'block'
-        return
-    } else {
-        TextInfoErrorRegister.style.display = 'none'
-    }
-    if (inputElementPassword.value.length < 8) {
-        passErrorCharacters.style.display = 'block'
-        return
-    } else {
-        passErrorCharacters.style.display = 'none'
-    }
+  localStorage.setItem('registerUser', JSON.stringify(obj));
 
-    const inputValueRegisterPassword = inputElementPassword.value
-    const inputValueRegisterText = inputElementLogin.value
+  successMessage.style.display = 'block';
+  successMessage.style.opacity = '1';
 
-    const obj = {
-      login: inputValueRegisterText,
-      password: inputValueRegisterPassword
-    }
-    const jsonString = JSON.stringify(obj)
-    localStorage.setItem('registerUser', jsonString)
+  setTimeout(() => {
+    successMessage.style.opacity = '0';
+  }, 2000);
 
-    const successMessage = document.getElementById('successMessage')
-    successMessage.style.display = 'block'
-    successMessage.style.opacity = '1'
+  registerContainer.style.display = 'none';
+  loginContainer.style.display = 'flex';
+});
 
-    setTimeout(() => {
-        successMessage.style.opacity = '0'
-    }, 2000)
+// Кнопка "Войти"
+const btnLogin = document.getElementById('btnLogin');
 
-    document.querySelector('.register_container').style.display = 'none'
-    document.querySelector('.loginContainer').style.display = 'flex'
-})
+btnLogin.addEventListener('click', function () {
+  const inputLogin = document.getElementById('userNameLogin').value;
+  const inputPassword = document.getElementById('loginPassword').value;
+  const TextInfoErrorLogin = document.getElementById('TextInfoErrorLogin');
+  const messageError = document.getElementById('registerIsIncorrect');
 
+  if (inputLogin === '' || inputPassword === '') {
+    TextInfoErrorLogin.style.display = 'block';
+    messageError.style.display = 'none';
+    return;
+  } else {
+    TextInfoErrorLogin.style.display = 'none';
+  }
 
+  const savedUser = JSON.parse(localStorage.getItem('registerUser'));
 
+  if (savedUser && inputLogin === savedUser.login && inputPassword === savedUser.password) {
+    localStorage.setItem('currentUser', savedUser.login);
+    window.location.href = '/html/account.html'; // Переход на личный кабинет
+  } else {
+    messageError.style.display = 'block';
+  }
+});
 
-const btnLogin = document.getElementById('btnLogin')
-
-
-btnLogin.addEventListener('click', function() {
-const registerContainer = document.querySelector('.register_container')
-    const loginContainer = document.querySelector('.loginContainer')
-    const logoutBtn = document.getElementById('logoutBtn')
-const inputLogin = document.getElementById('userNameLogin')
-const loginText = inputLogin.value
-console.log(loginText)
-
-const inputPasswordLogin = document.getElementById('loginPassword')
-const loginPassword = inputPasswordLogin.value
-console.log(loginPassword)
-
-const TextInfoErrorLogin = document.getElementById('TextInfoErrorLogin')
-
-if (inputLogin.value === '' || inputPasswordLogin.value === '' ) {
-    TextInfoErrorLogin.style.display = 'block'
-    messageError.style.display = 'none'
-    return
-} else {
-    TextInfoErrorLogin.style.display = 'none'
-}
-
-const savedUser = localStorage.getItem('registerUser')
-const parsedUser = JSON.parse(savedUser)
-console.log(parsedUser.login)
-console.log(parsedUser.password)
-
-const messageSuccess = document.getElementById('registerUser')
-messageSuccess.textContent = 'Вы вошли как: ' + parsedUser.login
-const messageError = document.getElementById('registerIsIncorrect')
-
-if (loginText === parsedUser.login && loginPassword === parsedUser.password) {
-    messageSuccess.style.display = 'block'
-    registerContainer.style.display = 'none'
-    loginContainer.style.display = 'none'
-    logoutBtn.style.display = 'block'
-    messageError.style.display = 'none'
-    chooseBlock.style.display = 'none'
-} else {
-    messageError.style.display = 'block'
-}
-
-const logoutBtnExit = document.getElementById('logoutBtn')
-
-logoutBtnExit.addEventListener('click', function() {
-    messageSuccess.style.display = 'none'
-    registerContainer.style.display = 'flex'
-    loginContainer.style.display = 'flex'
-    logoutBtn.style.display = 'none'
-    document.getElementById('userNameRegister').value = ''
-    document.getElementById('passwordRegister').value = ''
-    document.getElementById('userNameLogin').value = ''
-    document.getElementById('loginPassword').value = ''
-    messageError.style.display = 'none'
-})
-})
-
-
-const chooseRegisterBtn = document.getElementById('chooseRegisterBtn')
-const chooseLoginBtn = document.getElementById('chooseLoginBtn')
-const registerContainer = document.querySelector('.register_container')
-const loginContainer = document.querySelector('.loginContainer')
-
+// Переключение между формами
 chooseRegisterBtn.addEventListener('click', () => {
-  registerContainer.style.display = 'flex'
-  loginContainer.style.display = 'none'
-})
+  registerContainer.style.display = 'flex';
+  loginContainer.style.display = 'none';
+});
 
 chooseLoginBtn.addEventListener('click', () => {
-  loginContainer.style.display = 'flex'
-  registerContainer.style.display = 'none'
-})
-
-
+  loginContainer.style.display = 'flex';
+  registerContainer.style.display = 'none';
+});

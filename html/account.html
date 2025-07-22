@@ -3,29 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Личный кабинет</title>
+   <link rel="stylesheet" href="../css/account.css">
 </head>
 <body>
-  <h1>Добро пожаловать!</h1>
-  <p id="welcomeUser">Вы вошли как: </p>
+ <div class="account-wrapper">
+    <h1>Добро пожаловать!</h1>
+    <p id="welcomeUser">Вы вошли как: </p>
+    <button id="logoutBtn">Выйти</button>
+  </div>
 
-  <button id="logoutBtn">Выйти</button>
-
-  <script>
-    // Проверяем: пользователь вошёл?
-    const user = localStorage.getItem('currentUser')
-
-    if (!user) {
-      // Если нет — возвращаем на страницу входа
-      window.location.href = 'index.html'
-    } else {
-      document.getElementById('welcomeUser').textContent = 'Вы вошли как: ' + user
-    }
-
-    // Кнопка "Выйти"
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      localStorage.removeItem('currentUser')
-      window.location.href = 'index.html'
-    })
-  </script>
+  <script src="../js/account.js"></script>
 </body>
 </html>
