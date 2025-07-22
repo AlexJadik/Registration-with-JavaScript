@@ -38,6 +38,7 @@ body {
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
 .text_Register {
@@ -53,7 +54,6 @@ body {
     flex-direction: column;
     margin-bottom: 10px;
     width: 100%;
-    gap: 5px;
 }
 
 .registerPassword {
@@ -67,17 +67,19 @@ body {
 
 .main_Text {
     font-size: 30px;
-    margin-bottom: 15px;
 }
 
 .text_Register {
-    font-size: 25px;
-    font-weight: bold;
-    color: rgb(255, 200, 0);
-    text-shadow:  -1px -1px 0 rgb(72, 72, 72),
-     1px -1px 0 rgb(0, 0, 0),
-    -1px  1px 0 rgb(0, 0, 0),
-     1px  1px 0 rgb(0, 0, 0);
+ font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  border-bottom: 2px solid #3498db;
+  display: flex;
+  width: 100%;
+  padding-bottom: 6px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
 }
 
 label {
@@ -134,7 +136,7 @@ input[type="password"]:focus {
     transition: 0.3s ease;
     width: 100%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    margin-bottom: 15px;
+    margin-bottom: 13px;
 }
 
 .btn:hover {
@@ -148,25 +150,28 @@ input[type="password"]:focus {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.textLogin {
-    font-size: 25px;
-    font-weight: bold;
-    color: rgb(255, 200, 0);
-    text-shadow:  -1px -1px 0 rgb(0, 0, 0),
-     1px -1px 0 rgb(0, 0, 0),
-    -1px  1px 0 rgb(0, 0, 0),
-     1px  1px 0 rgb(0, 0, 0);
 
-     display: flex;
-     justify-content: center;
-     align-items: center;
+
+.textLogin {
+ font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  border-bottom: 2px solid #3498db;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -15px;
 }
 
 .loginContainer {
 display: flex;
 flex-direction: column;
-gap: 10px;
 width: 100%;
+gap: 15px;
 }
 
 .btnLogout {
@@ -245,4 +250,48 @@ background-color: #ff9100;
     display: none;
     pointer-events: none;
     color: red;
+}
+
+
+.chooseBlock {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  margin-bottom: 20px;
+}
+
+#chooseRegisterBtn,
+#chooseLoginBtn {
+    width: 150px; 
+    padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+}
+
+#chooseRegisterBtn:hover,
+#chooseLoginBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #00f2fe, #4facfe);
+}
+
+
+#chooseRegisterBtn:active,
+#chooseLoginBtn:active {
+  transform: scale(0.97);
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+}
+
+
+.register_container,
+.loginContainer {
+  display: none;
 }

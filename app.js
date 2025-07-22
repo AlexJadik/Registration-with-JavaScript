@@ -1,4 +1,5 @@
 const btnRegister = document.getElementById('btnRegister')
+const chooseBlock = document.querySelector('.chooseBlock')
 
 btnRegister.addEventListener('click', function() {
 
@@ -85,8 +86,8 @@ if (loginText === parsedUser.login && loginPassword === parsedUser.password) {
     registerContainer.style.display = 'none'
     loginContainer.style.display = 'none'
     logoutBtn.style.display = 'block'
-
     messageError.style.display = 'none'
+    chooseBlock.style.display = 'none'
 } else {
     messageError.style.display = 'block'
 }
@@ -104,6 +105,22 @@ logoutBtnExit.addEventListener('click', function() {
     document.getElementById('loginPassword').value = ''
     messageError.style.display = 'none'
 })
+})
+
+
+const chooseRegisterBtn = document.getElementById('chooseRegisterBtn')
+const chooseLoginBtn = document.getElementById('chooseLoginBtn')
+const registerContainer = document.querySelector('.register_container')
+const loginContainer = document.querySelector('.loginContainer')
+
+chooseRegisterBtn.addEventListener('click', () => {
+  registerContainer.style.display = 'flex'
+  loginContainer.style.display = 'none'
+})
+
+chooseLoginBtn.addEventListener('click', () => {
+  loginContainer.style.display = 'flex'
+  registerContainer.style.display = 'none'
 })
 
 
