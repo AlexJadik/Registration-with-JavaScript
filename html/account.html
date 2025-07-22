@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Личный кабинет</title>
+</head>
+<body>
+  <h1>Добро пожаловать!</h1>
+  <p id="welcomeUser">Вы вошли как: </p>
+
+  <button id="logoutBtn">Выйти</button>
+
+  <script>
+    // Проверяем: пользователь вошёл?
+    const user = localStorage.getItem('currentUser')
+
+    if (!user) {
+      // Если нет — возвращаем на страницу входа
+      window.location.href = 'index.html'
+    } else {
+      document.getElementById('welcomeUser').textContent = 'Вы вошли как: ' + user
+    }
+
+    // Кнопка "Выйти"
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('currentUser')
+      window.location.href = 'index.html'
+    })
+  </script>
+</body>
+</html>
