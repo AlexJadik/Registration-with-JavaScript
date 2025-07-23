@@ -13,33 +13,44 @@ btnRegister.addEventListener('click', function () {
   const passErrorCharacters = document.getElementById('passErrorCharacters');
   const successMessage = document.getElementById('successMessage');
 
-  if (inputElementLogin.value === '' || inputElementPassword.value === '') {
+  const login = inputElementLogin.value.trim();
+  const password = inputElementPassword.value.trim();
+
+   if (login === '' || password === '') {
     TextInfoErrorRegister.style.display = 'block';
     return;
   } else {
     TextInfoErrorRegister.style.display = 'none';
   }
 
-  if (inputElementPassword.value.length < 8) {
+  if (password.length < 8) {
     passErrorCharacters.style.display = 'block';
     return;
   } else {
     passErrorCharacters.style.display = 'none';
   }
 
-  const obj = {
-    login: inputElementLogin.value,
-    password: inputElementPassword.value
-  };
-
   const englishRegex = /^[A-Za-z0-9!@#$%^&*()_+=-]*$/;
-
-if (!englishRegex.test(inputElementLogin.value) || !englishRegex.test(inputElementPassword.value)) {
+  if (!englishRegex.test(login) || !englishRegex.test(password)) {
     alert('Допустимы только английские буквы и цифры!');
     return;
-}
+  }
 
-  localStorage.setItem('registerUser', JSON.stringify(obj));
+  // Получаем массив пользователей (или пустой, если нет)
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Проверяем, есть ли уже такой логин
+  const userExists = users.some(user => user.login === login);
+  if (userExists) {
+    alert('Пользователь с таким логином уже существует!');
+    return;
+  }
+
+  // Добавляем нового пользователя
+  users.push({ login, password });
+
+  // Сохраняем всех в localStorage
+  localStorage.setItem('users', JSON.stringify(users));
 
   successMessage.style.display = 'block';
   successMessage.style.opacity = '1';
@@ -62,7 +73,7 @@ btnLogin.addEventListener('click', function () {
   const TextInfoErrorLogin = document.getElementById('TextInfoErrorLogin');
   const messageError = document.getElementById('registerIsIncorrect');
 
-  // Сначала проверка на пустые поля
+  // Проверка на пустые поля
   if (inputLogin === '' || inputPassword === '') {
     TextInfoErrorLogin.style.display = 'block';
     messageError.style.display = 'none';
@@ -71,18 +82,20 @@ btnLogin.addEventListener('click', function () {
     TextInfoErrorLogin.style.display = 'none';
   }
 
-  // Потом проверка на английские символы
+  // Проверка на английские символы
   const englishRegex = /^[A-Za-z0-9!@#$%^&*()_+=-]*$/;
   if (!englishRegex.test(inputLogin) || !englishRegex.test(inputPassword)) {
     alert('Разрешены только английские буквы, цифры и спец. символы');
     return;
   }
 
-  const savedUser = JSON.parse(localStorage.getItem('registerUser'));
+  // Проверка среди всех пользователей
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const foundUser = users.find(user => user.login === inputLogin && user.password === inputPassword);
 
-  if (savedUser && inputLogin === savedUser.login && inputPassword === savedUser.password) {
-    localStorage.setItem('currentUser', savedUser.login);
-    window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/account.html'); // Переход на личный кабинет
+  if (foundUser) {
+    localStorage.setItem('currentUser', foundUser.login);
+    window.location.href = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/account.html');
   } else {
     messageError.style.display = 'block';
   }
