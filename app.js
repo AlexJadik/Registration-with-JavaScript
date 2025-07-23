@@ -32,6 +32,13 @@ btnRegister.addEventListener('click', function () {
     password: inputElementPassword.value
   };
 
+  const englishRegex = /^[A-Za-z0-9!@#$%^&*()_+=-]*$/;
+
+if (!englishRegex.test(inputElementLogin.value) || !englishRegex.test(inputElementPassword.value)) {
+    alert('Допустимы только английские буквы и цифры!');
+    return;
+}
+
   localStorage.setItem('registerUser', JSON.stringify(obj));
 
   successMessage.style.display = 'block';
@@ -53,6 +60,14 @@ btnLogin.addEventListener('click', function () {
   const inputPassword = document.getElementById('loginPassword').value;
   const TextInfoErrorLogin = document.getElementById('TextInfoErrorLogin');
   const messageError = document.getElementById('registerIsIncorrect');
+
+const englishRegex = /^[A-Za-z0-9!@#$%^&*()_+=-]*$/;
+
+if (!englishRegex.test(inputLogin) || !englishRegex.test(inputPassword)) {
+  alert('Разрешены только английские буквы, цифры и спец. символы');
+  return;
+}
+
 
   if (inputLogin === '' || inputPassword === '') {
     TextInfoErrorLogin.style.display = 'block';
@@ -82,3 +97,16 @@ chooseLoginBtn.addEventListener('click', () => {
   loginContainer.style.display = 'flex';
   registerContainer.style.display = 'none';
 });
+
+
+// (Удаление русских символов во время ввода) //
+function preventCyrillicInput(input) {
+  input.addEventListener('input', function () {
+    this.value = this.value.replace(/[А-Яа-яЁё]/g, '');
+  });
+}
+
+preventCyrillicInput(document.getElementById('userNameRegister'));
+preventCyrillicInput(document.getElementById('passwordRegister'));
+preventCyrillicInput(document.getElementById('userNameLogin'));
+preventCyrillicInput(document.getElementById('loginPassword'));
