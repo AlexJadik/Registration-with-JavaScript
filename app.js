@@ -56,25 +56,26 @@ if (!englishRegex.test(inputElementLogin.value) || !englishRegex.test(inputEleme
 const btnLogin = document.getElementById('btnLogin');
 
 btnLogin.addEventListener('click', function () {
-  const inputLogin = document.getElementById('userNameLogin').value;
-  const inputPassword = document.getElementById('loginPassword').value;
+  const inputLogin = document.getElementById('userNameLogin').value.trim();
+  const inputPassword = document.getElementById('loginPassword').value.trim();
+
   const TextInfoErrorLogin = document.getElementById('TextInfoErrorLogin');
   const messageError = document.getElementById('registerIsIncorrect');
 
-const englishRegex = /^[A-Za-z0-9!@#$%^&*()_+=-]*$/;
-
-if (!englishRegex.test(inputLogin) || !englishRegex.test(inputPassword)) {
-  alert('Разрешены только английские буквы, цифры и спец. символы');
-  return;
-}
-
-
+  // Сначала проверка на пустые поля
   if (inputLogin === '' || inputPassword === '') {
     TextInfoErrorLogin.style.display = 'block';
     messageError.style.display = 'none';
     return;
   } else {
     TextInfoErrorLogin.style.display = 'none';
+  }
+
+  // Потом проверка на английские символы
+  const englishRegex = /^[A-Za-z0-9!@#$%^&*()_+=-]*$/;
+  if (!englishRegex.test(inputLogin) || !englishRegex.test(inputPassword)) {
+    alert('Разрешены только английские буквы, цифры и спец. символы');
+    return;
   }
 
   const savedUser = JSON.parse(localStorage.getItem('registerUser'));
