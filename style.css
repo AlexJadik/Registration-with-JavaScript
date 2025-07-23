@@ -319,12 +319,24 @@ background-color: #ff9100;
 
   input[type="text"],
   input[type="password"] {
-    font-size: 14px;
-    padding: 8px 10px;
+    font-size: 16px;
+    padding: 10px;
   }
 
   .chooseBlock {
     flex-direction: column;
     gap: 15px;
+    width: 100%;
+  }
+
+  label {
+    font-size: 16px;
+  }
+
+  .registerAccount,
+  .registerPassword,
+  .loginAccount,
+  .loginPassword {
+    width: 100%;
   }
 }
