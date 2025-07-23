@@ -295,3 +295,36 @@ background-color: #ff9100;
 .loginContainer {
   display: none;
 }
+
+
+
+@media (max-width: 600px) {
+  .main_wrapper {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .btn,
+  #chooseRegisterBtn,
+  #chooseLoginBtn {
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .text_Register,
+  .textLogin {
+    font-size: 20px;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .chooseBlock {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

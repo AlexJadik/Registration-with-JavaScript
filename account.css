@@ -54,3 +54,26 @@ body {
   transform: scale(0.97);
   background: #c0392b;
 }
+
+
+
+
+@media (max-width: 400px) {
+  .account-wrapper {
+    padding: 20px;
+    width: 90%;
+  }
+
+  .account-wrapper h1 {
+    font-size: 22px;
+  }
+
+  #welcomeUser {
+    font-size: 16px;
+  }
+
+  #logoutBtn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
